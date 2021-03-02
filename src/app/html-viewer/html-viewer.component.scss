@@ -1,0 +1,83 @@
+.viewer-header {
+    .pager {
+        margin-right: 0.5px;
+        margin-left: 0.5px;
+        margin-top: 16px;
+        height: 36px;
+    
+        button {
+          display: none;
+        }
+    
+        display: inline-block;
+    
+        .pagenation {
+          display: flex;
+    
+          color: #333333;
+          padding: 0;
+          list-style: none;
+          li {
+            a {
+              display: block;
+              min-width: 40px;
+              padding: 8px;
+              color: #333333;
+              margin: 0 8px;
+              &:hover {
+                cursor: pointer;
+                opacity: 0.7;
+                color: #333333;
+                background-color: #f5f5f5;
+              }
+              &:active {
+                background-color: #113800;
+              }
+              &:not(:disabled):not(.disabled).active {
+                color: #ffffff;
+                background-color: #113800;
+              }
+            }
+          }
+        }
+      }
+}
+
+.sticky {
+    display: inline-block;        /* インラインブロック要素にする */
+    vertical-align:  top;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 10px;
+    width: 300px;
+    margin-left: 15px;
+  }
+  
+  
+  /* ページレイアウト (section.sheet を１ページとする) */
+  .HtmlPage {
+    font-family:"ＭＳ 明朝","HG明朝E", "游明朝", YuMincho, "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN",  "ＭＳ Ｐ明朝",  serif;
+    /* マージン・パディングをリセットした方がデザインしやすい */
+    margin: 1000;
+    padding: 0;
+    display: inline-block;        /* インラインブロック要素にする */
+  }
+  
+  .sheet {
+    background: white; /* 背景を白く */
+    box-shadow: 0 0.5mm 2mm rgba(0, 0, 0, 0.3); /* ドロップシャドウ */
+    margin: 5mm auto;
+    overflow: hidden;
+    position: relative;
+    box-sizing: border-box;
+    page-break-after: always;
+    /* 用紙サイズ A4 */
+    height: 1123px;
+    width: 794px;
+    /* 余白サイズ */
+    padding-top: 83px;
+    padding-left: 113px;
+    padding-right: 113px;
+  }
+  
+  
