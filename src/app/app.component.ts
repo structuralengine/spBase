@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { HtmlViewerComponent } from './html-viewer/html-viewer.component';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'spBase';
+  
+  constructor(private modalService: NgbModal) {
+  }
+
+  public htmlViewerOpen():void {
+
+    this.modalService.open(HtmlViewerComponent).result.then((result) => {
+    });
+
+  }
+
 }
