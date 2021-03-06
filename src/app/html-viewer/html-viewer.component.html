@@ -1,3 +1,4 @@
+<!--
 <div class="viewer-header">
   <div class="pager">
     <form [formGroup]="myControl">
@@ -11,7 +12,6 @@
         <li><a id="next" link="146" (click)="moveToNextPage(5)" aria-label="Next">》</a></li>
       </ul>
       <div *ngIf="Editing">
-        <!-- <mat-form-field> -->
           <input
             type="number"
             matInput
@@ -19,18 +19,44 @@
             formControlName="number2"
             class="pageNum"
           />
-        <!-- </mat-form-field> -->
       </div>
       <button mat-raised-button (click)="click()">click</button>
     </form>
-    <!-- <p class="message">{{message}}</p> -->
   </div>
 </div>
+-->
 
 <div #print_section id="print_section" class="HtmlPage">
-  <app-test-html></app-test-html>
+
+  <div class="slider">
+  
+  <a href="#slide-1">1</a>
+  <a href="#slide-2">2</a>
+  <a href="#slide-3">3</a>
+  <a href="#slide-4">4</a>
+  <a href="#slide-5">5</a>
+ 
+    <app-test-html></app-test-html>
+    <!-- <div id="slide-1">
+      1
+    </div>
+    <div id="slide-2">
+      2
+    </div>
+    <div id="slide-3">
+      3
+    </div>
+    <div id="slide-4">
+      4
+    </div>
+    <div id="slide-5">
+      5
+    </div> -->
 </div>
 
+</div>
+
+<!--
 <div class="sticky">
   <button (click)="close()">Close</button>
   <button (click)="print()">Print</button>
@@ -43,3 +69,4 @@
     <li>目次6</li>
   </ul>
 </div>
+-->
