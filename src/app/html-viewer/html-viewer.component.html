@@ -1,72 +1,29 @@
-<!--
-<div class="viewer-header">
-  <div class="pager">
-    <form [formGroup]="myControl">
-      <ul class="pagenation" *ngIf="!Editing">
-        <li><a id="prev" link="140" (click)="moveToNextPage(-5)" aria-label="Previous">《</a></li>
-        <li><a id="141"  link="141" (click)="moveToNextPage(-2)" [class.active]="liActive[0]">{{ liNumber[0] }}</a></li>
-        <li><a id="142"  link="142" (click)="moveToNextPage(-1)" [class.active]="liActive[1]">{{ liNumber[1] }}</a></li>
-        <li><a id="143"  link="143" (click)="moveToNextPage(0)"  [class.active]="liActive[2]">{{ liNumber[2] }}</a></li>
-        <li><a id="144"  link="144" (click)="moveToNextPage(1)"  [class.active]="liActive[3]">{{ liNumber[3] }}</a></li>
-        <li><a id="145"  link="145" (click)="moveToNextPage(2)"  [class.active]="liActive[4]">{{ liNumber[4] }}</a></li>
-        <li><a id="next" link="146" (click)="moveToNextPage(5)" aria-label="Next">》</a></li>
-      </ul>
-      <div *ngIf="Editing">
-          <input
-            type="number"
-            matInput
-            matType="number"
-            formControlName="number2"
-            class="pageNum"
-          />
-      </div>
-      <button mat-raised-button (click)="click()">click</button>
-    </form>
-  </div>
-</div>
--->
+<header>
+    <p class="title">印刷</p>
+    <div>
+        <form>
+            <select [(ngModel)]="printlist.selectedIndex" (ngModelChange)='onSelectChange($event.target.value)' name="first">
+        <option *ngFor="let item of PrintIndex" [value]="item.id" [selected]="1">
+          {{item.name}}
+        </option>
+      </select>
+        </form>
+    </div>
+    <div class="slider">
+        <a href="#slide-1">1</a>
+        <a href="#slide-2">2</a>
+        <a href="#slide-3">3</a>
+        <a href="#slide-4">4</a>
+        <a href="#slide-5">5</a>
+    </div>
+    <div class="button-area">
+        <button (click)="print()" class="print-button"><i class="fi fi-print"></i></button>
+        <button (click)="close()" class="dialog-close-button">×</button>
+    </div>
+</header>
 
 <div #print_section id="print_section" class="HtmlPage">
 
-  <div class="slider">
-  
-  <a href="#slide-1">1</a>
-  <a href="#slide-2">2</a>
-  <a href="#slide-3">3</a>
-  <a href="#slide-4">4</a>
-  <a href="#slide-5">5</a>
- 
     <app-test-html></app-test-html>
-    <!-- <div id="slide-1">
-      1
-    </div>
-    <div id="slide-2">
-      2
-    </div>
-    <div id="slide-3">
-      3
-    </div>
-    <div id="slide-4">
-      4
-    </div>
-    <div id="slide-5">
-      5
-    </div> -->
-</div>
 
 </div>
-
-<!--
-<div class="sticky">
-  <button (click)="close()">Close</button>
-  <button (click)="print()">Print</button>
-  <ul>
-    <li>目次1</li>
-    <li>目次2</li>
-    <li>目次3</li>
-    <li>目次4</li>
-    <li>目次5</li>
-    <li>目次6</li>
-  </ul>
-</div>
--->

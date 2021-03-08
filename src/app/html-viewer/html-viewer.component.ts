@@ -1,16 +1,16 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as printJS from 'print-js';
 import { DataHelperModule } from '../providers/data-helper.module';
+import { PrintListService } from '../print-list/print-list.service';
 
 @Component({
   selector: 'app-html-viewer',
   templateUrl: './html-viewer.component.html',
-  styleUrls: ['./html-viewer.component.scss']
+  styleUrls: ['./html-viewer.component.scss', '../reset.scss'],
 })
 export class HtmlViewerComponent implements OnInit {
-
   //@ViewChild('print_section', { static: true }) print_section: ElementRef;
 
   private PrintCss: string;
@@ -20,9 +20,13 @@ export class HtmlViewerComponent implements OnInit {
   public Editing: boolean = false;
   private page: number = 0;
 
-  constructor(public activeModal: NgbActiveModal,
-    private helper: DataHelperModule) {
-      
+  public PrintIndex;
+
+  constructor(
+    public activeModal: NgbActiveModal,
+    private helper: DataHelperModule,
+    public printlist: PrintListService
+  ) {
     this.PrintCss = '@page {';
     this.PrintCss += 'size: A4;';
     this.PrintCss += 'margin: 0;';
@@ -33,7 +37,8 @@ export class HtmlViewerComponent implements OnInit {
     this.PrintCss += ' }';
 
     this.PrintCss += '* {';
-    this.PrintCss += 'font-family:"ＭＳ 明朝", "HG明朝E", "游明朝", YuMincho, "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "ＭＳ Ｐ明朝", serif;';
+    this.PrintCss +=
+      'font-family:"ＭＳ 明朝", "HG明朝E", "游明朝", YuMincho, "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "ＭＳ Ｐ明朝", serif;';
     this.PrintCss += 'margin: 0;';
     this.PrintCss += 'padding: 0;';
     this.PrintCss += '}';
@@ -47,16 +52,32 @@ export class HtmlViewerComponent implements OnInit {
     this.PrintCss += 'padding-left: 30mm;';
     this.PrintCss += 'padding-right: 30mm;';
     this.PrintCss += '}';
+
+    this.PrintIndex = this.printlist.PrintIndex;
   }
 
   ngOnInit(): void {
     this.myControl = new FormGroup({
       number2: new FormControl(),
     });
+    this.onSelectChange(this.printlist.selectedIndex);
+  }
+  
+  onSelectChange(value: string) {
+    let v = parseInt(value);
+    const data = this.printlist.PrintIndex[v - 1];
+
+    // this.InputData.initModel(data.file);
+    // this.get(item.file, item.name);
+
+    //this.fileIndex.FEMlist = value;
+  }
+
+  public dialogClose(): void {
+    this.activeModal.close(HtmlViewerComponent);
   }
 
   public changePage(currentPage: number): void {
-
     if (currentPage === this.page) {
       // 同じボタンを押した時
       this.Editing = true; // 編集ボックスを表示する
@@ -75,7 +96,6 @@ export class HtmlViewerComponent implements OnInit {
       this.liActive[i] = false;
     }
     this.liActive[n] = true;
-
   }
 
   // ページを飛んだあと左右＜＞に移動や隣ページへの移動周辺、5ページ送り
@@ -131,10 +151,7 @@ export class HtmlViewerComponent implements OnInit {
     printJS({
       printable: 'print_section',
       type: 'html',
-      style: this.PrintCss
+      style: this.PrintCss,
     });
   }
-
-
-
 }
