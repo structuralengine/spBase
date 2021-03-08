@@ -1,53 +1,41 @@
-.viewer-header {
-    .pager {
-        margin-right: 0.5px;
-        margin-left: 0.5px;
-        margin-top: 16px;
-        height: 36px;
-        button {
-            display: none;
+/*header*/
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background-color: #333333;
+    .title {
+        color: #fff;
+        font-size: 14px;
+    }
+    .button-area {
+        .print-button {
+            margin-right: 12px;
+            color: #fff;
+            font-size: 20px;
+            &:hover {
+                cursor: pointer;
+                opacity: 0.7;
+            }
         }
-        display: inline-block;
-        .pagenation {
-            display: flex;
+        .dialog-close-button {
+            min-height: 30px;
+            min-width: 50px;
+            padding: 2px;
             color: #333333;
-            padding: 0;
-            list-style: none;
-            li {
-                a {
-                    display: block;
-                    min-width: 40px;
-                    padding: 8px;
-                    color: #333333;
-                    margin: 0 8px;
-                    &:hover {
-                        cursor: pointer;
-                        opacity: 0.7;
-                        color: #333333;
-                        background-color: #f5f5f5;
-                    }
-                    &:active {
-                        background-color: #113800;
-                    }
-                    &:not(:disabled):not(.disabled).active {
-                        color: #ffffff;
-                        background-color: #113800;
-                    }
-                }
+            background-color: #f5f5f5;
+            border: 1px solid #f5f5f5;
+            text-align: center;
+            font-size: 20px;
+            &:hover {
+                opacity: 0.7;
+                background-color: #ee0000;
+                padding: 2px;
             }
         }
     }
-}
-
-.sticky {
-    display: inline-block;
-    /* インラインブロック要素にする */
-    vertical-align: top;
-    position: -webkit-sticky;
-    position: sticky;
-    top: 10px;
-    width: 300px;
-    margin-left: 15px;
 }
 
 
@@ -86,55 +74,12 @@
 }
 
 .slider {
-    width: 100%;
     text-align: center;
     overflow: hidden;
     text-align: center;
     overflow: hidden;
 }
 
-// .slides {
-//   display: flex;
-//   overflow-x: auto;
-//   scroll-snap-type: x mandatory;
-//   scroll-behavior: smooth;
-//   -webkit-overflow-scrolling: touch;
-//   /*
-//     scroll-snap-points-x: repeat(300px);
-//     scroll-snap-type: mandatory;
-//     */
-// }
-// .slides::-webkit-scrollbar {
-//   width: 10px;
-//   height: 10px;
-// }
-// .slides::-webkit-scrollbar-thumb {
-//   background: black;
-//   border-radius: 10px;
-// }
-// .slides::-webkit-scrollbar-track {
-//   background: transparent;
-// }
-// .slides > div {
-//   scroll-snap-align: start;
-//   flex-shrink: 0;
-//   width: 300px;
-//   height: 300px;
-//   margin-right: 50px;
-//   border-radius: 10px;
-//   background: #eee;
-//   transform-origin: center center;
-//   transform: scale(1);
-//   transition: transform 0.5s;
-//   position: relative;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   font-size: 100px;
-// }
-// .slides > div:target {
-//   /*   transform: scale(0.8); */
-// }
 .author-info {
     background: rgba(0, 0, 0, 0.75);
     color: white;
@@ -169,7 +114,6 @@ img {
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    margin: 0 0 0.5rem 0;
     position: relative;
 }
 
@@ -180,24 +124,3 @@ img {
 .slider>a:focus {
     background: #000;
 }
-
-
-/* Don't need button navigation */
-
-// @supports (scroll-snap-type) {
-//     .slider>a {
-//         display: none;
-//     }
-// }
-// html,
-// body {
-//   height: 100%;
-//   overflow: hidden;
-// }
-// body {
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   background-color:black;
-//   font-family: "Ropa Sans", sans-serif;
-// }
