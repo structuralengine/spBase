@@ -14,15 +14,23 @@ var AppComponent = /** @class */ (function () {
         this.modalService = modalService;
     }
     AppComponent.prototype.htmlViewerOpen = function () {
-        this.modalService.open(html_viewer_component_1.HtmlViewerComponent).result.then(function (result) {
-        });
+        this.modalService.open(html_viewer_component_1.HtmlViewerComponent).result.then(function (result) { });
     };
-    AppComponent.prototype.scrolling = function () {
-        console.log('scrolling');
+    // @HostListener('scroll') scrolling(){
+    //   console.log('scrolling');
+    // }
+    AppComponent.prototype.onScroll = function () {
+        var infoF = document.getElementById('infoFrame');
+        if (infoF !== null) {
+            infoF.innerHTML = 'ScrollY:' + document.documentElement.scrollTop;
+        }
+    };
+    AppComponent.prototype.onScroll2 = function (event) {
+        this.onScroll();
     };
     __decorate([
-        core_1.HostListener('scroll')
-    ], AppComponent.prototype, "scrolling");
+        core_1.HostListener('window:scroll', ['$event']) // for window scroll events
+    ], AppComponent.prototype, "onScroll2");
     AppComponent = __decorate([
         core_1.Component({
             selector: 'app-root',

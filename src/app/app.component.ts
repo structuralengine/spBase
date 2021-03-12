@@ -5,22 +5,28 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  
-  constructor(private modalService: NgbModal) {
+  constructor(private modalService: NgbModal) {}
+
+  public htmlViewerOpen(): void {
+    this.modalService.open(HtmlViewerComponent).result.then((result) => {});
   }
 
-  public htmlViewerOpen():void {
+  // @HostListener('scroll') scrolling(){
+  //   console.log('scrolling');
+  // }
 
-    this.modalService.open(HtmlViewerComponent).result.then((result) => {
-    });
-
+  public onScroll() {
+    var infoF = document.getElementById('infoFrame');
+    if (infoF !== null) {
+      infoF.innerHTML = 'ScrollY:' + document.documentElement.scrollTop;
+    }
   }
 
-  @HostListener('scroll') scrolling(){
-    console.log('scrolling');
+  @HostListener('window:scroll', ['$event']) // for window scroll events
+  onScroll2(event: any) {
+    this.onScroll();
   }
-
 }
