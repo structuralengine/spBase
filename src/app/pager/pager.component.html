@@ -1,0 +1,16 @@
+<div class="pagerArea">
+    <div class="pager">
+        <form [formGroup]="myControl">
+            <ul class="pagenation" style="margin: 0;">
+                <li><a id="prev" link="140" (click)="moveToNextPage(-1)" aria-label="Previous">《</a></li>
+                <li>
+                    <input type="number" id="number" key="KeyId" [(ngModel)]="key" matInput matType="number" formControlName="number2" class="pageNum">
+                </li>
+                <li style="margin-top:6px;">/{{count}}</li>
+                <li><a id="next" (click)="moveToNextPage(1)" aria-label="Next">》</a></li>
+            </ul>
+            <button mat-raised-button (click)="click()">click</button>
+        </form>
+        <!-- <p class="message">{{message}}</p> -->
+    </div>
+</div>

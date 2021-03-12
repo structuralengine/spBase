@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { HtmlViewerComponent } from './html-viewer/html-viewer.component';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
@@ -17,6 +17,10 @@ export class AppComponent {
     this.modalService.open(HtmlViewerComponent).result.then((result) => {
     });
 
+  }
+
+  @HostListener('scroll') scrolling(){
+    console.log('scrolling');
   }
 
 }

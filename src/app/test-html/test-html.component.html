@@ -1,7 +1,7 @@
 <div class="print-container">
     <div class="slides">
-        <div *ngFor="let data of dataset">
-            <div>{{ data }}</div>
+        <div *ngFor="let data of dataset" style="page-break-after: always;" id="{{data}}">
+            <p>{{ data }}</p>
         </div>
     </div>
 </div>

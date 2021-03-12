@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, Directive } from '@angular/core';
 import { PrintListService } from '../print-list/print-list.service';
 
 @Component({
@@ -7,30 +7,30 @@ import { PrintListService } from '../print-list/print-list.service';
   styleUrls: ['./test-html.component.scss'],
 })
 export class TestHtmlComponent implements OnInit {
-  public dataset = <any>{};
-  constructor(public printlist: PrintListService) {}
+  private ofset: number = 60;
+  private startPos: number = 0;
+  private headerPos: number = 0;
+
+  @Directive({
+    selector: '[scrollTracker]',
+  })
+  public dataset: any[] = new Array();
 
   ngOnInit(): void {
-    const d = this.printlist.PrintIndex;
-    const table = this.datad(d);
-    this.dataset = table.body;
+    this.dataset = this.printlist.dataDisplay(0).body;
+    console.log(this.dataset); // 水平方向
   }
 
-  datad(d:any) {
-    let body: any[] = new Array();
-    const keys: string[] = Object.keys(d);
-    for (const index of keys) {
-      let i = parseInt(index);
-      let item = d[i].id;
-      body.push(item);
-    }
-    return {body};
-  }
+  // @HostListener('scroll', ['$event'])
+  // onScroll(event: any) {
+  //   // visible height + pixel scrolled >= total height
+  //   if (
+  //     event.target.offsetHeight + event.target.scrollTop >=
+  //     event.target.scrollHeight
+  //   ) {
+  //     console.log('End');
+  //   }
+  // }
 
-
-  keyValues = {
-    key1: 'value1',
-    key2: 'value2',
-    key3: 'value3',
-  };
+  constructor(public printlist: PrintListService) {}
 }

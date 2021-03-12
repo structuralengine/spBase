@@ -4,6 +4,7 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as printJS from 'print-js';
 import { DataHelperModule } from '../providers/data-helper.module';
 import { PrintListService } from '../print-list/print-list.service';
+import { HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-html-viewer',
@@ -19,6 +20,8 @@ export class HtmlViewerComponent implements OnInit {
   public myControl: any = null;
   public Editing: boolean = false;
   private page: number = 0;
+
+  public count: number = 0;
 
   public PrintIndex;
 
@@ -61,8 +64,34 @@ export class HtmlViewerComponent implements OnInit {
       number2: new FormControl(),
     });
     this.onSelectChange(this.printlist.selectedIndex);
+    this.count = this.printlist.dataDisplay(0).keysCount;
   }
-  
+
+  //　pager.component からの通知を受け取る
+  onReceiveEventFromChild(eventData: number) {
+    // this.loadPage(eventData, this.ROWS_COUNT);
+  }
+  // window.addEventListener('load', (event) => {
+
+  //   // (1)ページ読み込み時に一度だけスクロール量を出力
+  //   var scroll_y = window.scrollY;
+  //   console.log(scroll_y);
+
+  //   // (2)スクロールするたびにスクロール量を出力
+  //   window.addEventListener('scroll', (event) => {
+  //     var scroll_y = window.scrollY;
+  //     console.log(scroll_y);
+  //   });
+  // });
+
+  loadPage(currentPage: number, row: number) {
+    // for (let i = this.dataset.length + 1; i <= row; i++) {
+    //   const fix_node = this.data.getElementColumns(currentPage, i);
+    //   this.dataset.push(fix_node);
+    // }
+    // this.page = currentPage;
+  }
+
   onSelectChange(value: string) {
     let v = parseInt(value);
     const data = this.printlist.PrintIndex[v - 1];
