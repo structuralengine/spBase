@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 
@@ -26,7 +26,7 @@ export class PagerComponent implements OnInit {
 
   constructor(
     private helper: DataHelperModule,
-    private printlist: PrintListService
+    private printlist: PrintListService,
   ) {
     this.changePage(1);
   }
@@ -47,20 +47,20 @@ export class PagerComponent implements OnInit {
     // }
     this.page = currentPage;
 
-    // 親コンポーネントに通知する
-    this.event.emit(this.page);
+    // // 親コンポーネントに通知する
+    // this.event.emit(this.page);
 
-    // ページ番号性を設定する
-    const n = Math.min(currentPage - 1, 2);
-    for (let i = 0; i < this.liNumber.length; i++) {
-      this.liNumber[i] = currentPage - n + i;
-    }
+    // // ページ番号性を設定する
+    // const n = Math.min(currentPage - 1, 2);
+    // for (let i = 0; i < this.liNumber.length; i++) {
+    //   this.liNumber[i] = currentPage - n + i;
+    // }
 
-    // active属性を設定する
-    for (let i = 0; i < this.liActive.length; i++) {
-      this.liActive[i] = false;
-    }
-    this.liActive[n] = true;
+    // // active属性を設定する
+    // for (let i = 0; i < this.liActive.length; i++) {
+    //   this.liActive[i] = false;
+    // }
+    // this.liActive[n] = true;
   }
 
   // ページを飛んだあと左右＜＞に移動や隣ページへの移動周辺、5ページ送り
@@ -88,14 +88,18 @@ export class PagerComponent implements OnInit {
     Next = this.page + count;
     if (Next < 1) {
       Next = 1;
+      this.page = 1;
     }
 
     this.changePage(Next);
     this.myControl.value.number2 = Next;
     let number = document.getElementById('number');
     if (number !== null && this.myControl.value.number2 < 1) {
+      this.myControl.value.number2 = 1;
       this.key = 1;
     } else if (number !== null && this.myControl.value.number2 > this.count) {
+      this.page = this.count;
+      this.myControl.value.number2 = this.count;
       this.key = this.count;
     } else if (number === null) {
       alert('da');
@@ -117,4 +121,8 @@ export class PagerComponent implements OnInit {
       this.changePage(value);
     }
   }
+  
+  // scrollEventt(childObj:){
+
+  // }
 }

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+// import { PagerComponent } from '../pager/pager.component';
 
 @Injectable({
   providedIn: 'root',
@@ -7,7 +8,7 @@ export class PrintListService {
   public dataset = <any>{};
   public table: any;
   public selectedIndex = '1'; // スペクトルの種類
-
+  public pageScroll_service:number = 0;
   public PrintIndex: any[] = [
     { id: '1', name: 'node' },
     { id: '2', name: 'fixnode' },
@@ -35,5 +36,11 @@ export class PrintListService {
       body.push(item);
     }
     return { keysCount, body };
+  }
+
+  pageScroll(o:number){
+    // const d = this.pager.changePage(o);
+    // console.log(d);
+    // return d;
   }
 }

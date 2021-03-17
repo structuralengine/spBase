@@ -18,15 +18,26 @@ export class AppComponent {
   //   console.log('scrolling');
   // }
 
-  public onScroll() {
-    var infoF = document.getElementById('infoFrame');
-    if (infoF !== null) {
-      infoF.innerHTML = 'ScrollY:' + document.documentElement.scrollTop;
+  // @HostListener('window:scroll', ['$event']) // for window scroll events
+  // onScroll2(event: any) {
+
+  // }
+
+  @HostListener('scroll') scrolling(){
+    console.log('scrolling');
+  }
+
+
+  
+  public onc() {
+    var infoH = document.getElementById('scroll-box1');
+    var infoI = document.getElementById('scroll-amount1');
+    if (infoH !== null) {
+      infoH.addEventListener('scroll', function() {
+        if(infoI !== null){
+        infoI.textContent = 'ScrollY:' + infoI.scrollTop;
+      }});
     }
   }
 
-  @HostListener('window:scroll', ['$event']) // for window scroll events
-  onScroll2(event: any) {
-    this.onScroll();
-  }
 }

@@ -23,6 +23,8 @@ export class HtmlViewerComponent implements OnInit {
 
   public count: number = 0;
 
+  public name: number = 0;
+
   public PrintIndex;
 
   constructor(
@@ -183,4 +185,67 @@ export class HtmlViewerComponent implements OnInit {
       style: this.PrintCss,
     });
   }
+
+  public onScroll() {
+    var infoF = document.getElementById('infoFrame');
+    if (infoF !== null) {
+      infoF.innerHTML = 'ScrollY:' + document.documentElement.scrollTop;
+    }
+  }
+
+  // @HostListener('window:scroll', ['$event']) // for window scroll events
+  // onScroll2(event: any) {
+  //   this.onScroll();
+  //   this.onc();
+  // }
+
+  // @HostListener('scroll',['$event'])
+  // onScroll3(event2:any){
+  //   this.onScroll4();
+  // }
+
+  // public onScroll4() {
+  //   var infoG = document.getElementById('scroll-amount');
+  //   if (infoG !== null) {
+  //     infoG.textContent = 'ScrollY:' + document.documentElement.scrollTop;
+  //   }
+  // }
+
+  // public onc() {
+  //   var infoH = document.getElementById('scroll-box');
+  //   var infoI = document.getElementById('scroll-amount');
+  //   if (infoH !== null) {
+  //     infoH.addEventListener('scroll', () => {
+  //       if (infoI !== null) {
+  //         //  infoI.textContent = 'ScrollY:' + infoI.scrollTop();
+  //       }
+  //     });
+  //   }
+  // }
+
+  // public gfg_Run() {
+  //   const el_up = document.getElementById('GFG_UP');
+  //   const el_down = document.getElementById('GFG_DOWN');
+
+  //   const text = document.getElementById('t');
+  //   if (text !== null) {
+  //     text.scrollTop = text.scrollHeight;
+  //   }
+  //   if (el_down !== null) {
+  //     el_down.innerHTML = 'Scroll bar is moved to bottom.';
+  //   }
+  // }
+
+  // public scrollEvent(e:any){
+  //   const i = e;
+  //   console.log(i);
+  // }
+
+  // window.addEventListener('scroll', () => {
+  //   // ここに関数
+  //  });
+
+  // $('#scroll-box').scroll(function() {
+  //     $('#scroll-amount').text($(this).scrollTop() + 'px');
+  // });
 }

@@ -19,18 +19,26 @@ var AppComponent = /** @class */ (function () {
     // @HostListener('scroll') scrolling(){
     //   console.log('scrolling');
     // }
-    AppComponent.prototype.onScroll = function () {
-        var infoF = document.getElementById('infoFrame');
-        if (infoF !== null) {
-            infoF.innerHTML = 'ScrollY:' + document.documentElement.scrollTop;
+    // @HostListener('window:scroll', ['$event']) // for window scroll events
+    // onScroll2(event: any) {
+    // }
+    AppComponent.prototype.scrolling = function () {
+        console.log('scrolling');
+    };
+    AppComponent.prototype.onc = function () {
+        var infoH = document.getElementById('scroll-box1');
+        var infoI = document.getElementById('scroll-amount1');
+        if (infoH !== null) {
+            infoH.addEventListener('scroll', function () {
+                if (infoI !== null) {
+                    infoI.textContent = 'ScrollY:' + infoI.scrollTop;
+                }
+            });
         }
     };
-    AppComponent.prototype.onScroll2 = function (event) {
-        this.onScroll();
-    };
     __decorate([
-        core_1.HostListener('window:scroll', ['$event']) // for window scroll events
-    ], AppComponent.prototype, "onScroll2");
+        core_1.HostListener('scroll')
+    ], AppComponent.prototype, "scrolling");
     AppComponent = __decorate([
         core_1.Component({
             selector: 'app-root',

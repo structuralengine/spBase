@@ -12,10 +12,34 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 </head>
 
 <body class="mat-typography">
     <app-root></app-root>
+
+    <p>スクロール位置：<span id="scroll-amount">0px</span></p>
+    <div id="scroll-box">
+        <div id="scroll-contents">スクロール領域</div>
+    </div>
+
+    <style>
+        #scroll-box {
+            overflow: scroll;
+            height: 100px;
+            border: 1px solid black;
+        }
+        
+        #scroll-contents {
+            height: 700px;
+        }
+    </style>
+
+    <script>
+        $('#scroll-box').scroll(function() {
+            $('#scroll-amount').text($(this).scrollTop() + 'px');
+        });
+    </script>
 </body>
 
 </html>

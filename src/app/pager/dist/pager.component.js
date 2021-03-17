@@ -37,18 +37,18 @@ var PagerComponent = /** @class */ (function () {
         //   return; // 何もしない
         // }
         this.page = currentPage;
-        // 親コンポーネントに通知する
-        this.event.emit(this.page);
-        // ページ番号性を設定する
-        var n = Math.min(currentPage - 1, 2);
-        for (var i = 0; i < this.liNumber.length; i++) {
-            this.liNumber[i] = currentPage - n + i;
-        }
-        // active属性を設定する
-        for (var i = 0; i < this.liActive.length; i++) {
-            this.liActive[i] = false;
-        }
-        this.liActive[n] = true;
+        // // 親コンポーネントに通知する
+        // this.event.emit(this.page);
+        // // ページ番号性を設定する
+        // const n = Math.min(currentPage - 1, 2);
+        // for (let i = 0; i < this.liNumber.length; i++) {
+        //   this.liNumber[i] = currentPage - n + i;
+        // }
+        // // active属性を設定する
+        // for (let i = 0; i < this.liActive.length; i++) {
+        //   this.liActive[i] = false;
+        // }
+        // this.liActive[n] = true;
     };
     // ページを飛んだあと左右＜＞に移動や隣ページへの移動周辺、5ページ送り
     PagerComponent.prototype.moveToNextPage = function (count) {
@@ -75,14 +75,18 @@ var PagerComponent = /** @class */ (function () {
         Next = this.page + count;
         if (Next < 1) {
             Next = 1;
+            this.page = 1;
         }
         this.changePage(Next);
         this.myControl.value.number2 = Next;
         var number = document.getElementById('number');
         if (number !== null && this.myControl.value.number2 < 1) {
+            this.myControl.value.number2 = 1;
             this.key = 1;
         }
         else if (number !== null && this.myControl.value.number2 > this.count) {
+            this.page = this.count;
+            this.myControl.value.number2 = this.count;
             this.key = this.count;
         }
         else if (number === null) {

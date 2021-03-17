@@ -1,5 +1,5 @@
 <div class="print-container">
-    <div class="slides">
+    <div class="slides" (scroll)="scrollEvent($event)">
         <div *ngFor="let data of dataset" style="page-break-after: always;" id="{{data}}">
             <p>{{ data }}</p>
         </div>

@@ -21,6 +21,7 @@ var HtmlViewerComponent = /** @class */ (function () {
         this.Editing = false;
         this.page = 0;
         this.count = 0;
+        this.name = 0;
         this.PrintCss = '@page {';
         this.PrintCss += 'size: A4;';
         this.PrintCss += 'margin: 0;';
@@ -153,6 +154,12 @@ var HtmlViewerComponent = /** @class */ (function () {
             type: 'html',
             style: this.PrintCss
         });
+    };
+    HtmlViewerComponent.prototype.onScroll = function () {
+        var infoF = document.getElementById('infoFrame');
+        if (infoF !== null) {
+            infoF.innerHTML = 'ScrollY:' + document.documentElement.scrollTop;
+        }
     };
     var HtmlViewerComponent_1;
     HtmlViewerComponent = HtmlViewerComponent_1 = __decorate([

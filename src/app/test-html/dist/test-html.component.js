@@ -9,32 +9,32 @@ exports.__esModule = true;
 exports.TestHtmlComponent = void 0;
 var core_1 = require("@angular/core");
 var TestHtmlComponent = /** @class */ (function () {
-    // @HostListener('scroll', ['$event'])
-    // onScroll(event: any) {
-    //   // visible height + pixel scrolled >= total height
-    //   if (
-    //     event.target.offsetHeight + event.target.scrollTop >=
-    //     event.target.scrollHeight
-    //   ) {
-    //     console.log('End');
-    //   }
-    // }
     function TestHtmlComponent(printlist) {
         this.printlist = printlist;
         this.ofset = 60;
         this.startPos = 0;
         this.headerPos = 0;
         this.dataset = new Array();
+        this.page_scroll = 0;
+        this.event = new core_1.EventEmitter();
     }
     TestHtmlComponent.prototype.ngOnInit = function () {
         this.dataset = this.printlist.dataDisplay(0).body;
         console.log(this.dataset); // 水平方向
     };
+    TestHtmlComponent.prototype.scrollEvent = function (e) {
+        var scroll_top = e.target.scrollTop;
+        if (scroll_top === 0) {
+            scroll_top = 1;
+        }
+        this.page_scroll = Math.ceil(scroll_top / 975);
+        // 親コンポーネントに通知する
+        this.event.emit(this.page_scroll);
+        console.log(this.page_scroll);
+    };
     __decorate([
-        core_1.Directive({
-            selector: '[scrollTracker]'
-        })
-    ], TestHtmlComponent.prototype, "dataset");
+        core_1.Output()
+    ], TestHtmlComponent.prototype, "event");
     TestHtmlComponent = __decorate([
         core_1.Component({
             selector: 'app-test-html',
