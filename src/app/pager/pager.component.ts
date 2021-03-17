@@ -39,7 +39,7 @@ export class PagerComponent implements OnInit {
     this.key = 1;
   }
 
-  public changePage(currentPage: number): void {
+  public changePage(currentPage: number) {
     // if (currentPage === this.page) {
     //   // 同じボタンを押した時
     //   this.Editing = true; // 編集ボックスを表示する

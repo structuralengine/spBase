@@ -30,7 +30,7 @@ var TestHtmlComponent = /** @class */ (function () {
         this.page_scroll = Math.ceil(scroll_top / 975);
         // 親コンポーネントに通知する
         this.event.emit(this.page_scroll);
-        console.log(this.page_scroll);
+        //  console.log(this.page_scroll);
     };
     __decorate([
         core_1.Output()

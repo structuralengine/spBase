@@ -31,7 +31,7 @@
     }
 }
 
-@media screen and (max-width:960px) {
+@media screen and (max-width: 960px) {
     .print-container {
         padding: 12px 0;
         .slides {
@@ -89,6 +89,16 @@
     justify-content: center;
     align-items: center;
     font-size: 100px;
+    position: relative;
+    page-break-after: always;
+    counter-increment: page_count;
+}
+
+.slides>div::after {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    content: counter(page_count) "ページ";
 }
 
 .sheet {

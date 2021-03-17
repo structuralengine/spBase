@@ -27,6 +27,8 @@ export class HtmlViewerComponent implements OnInit {
 
   public PrintIndex;
 
+  key: any;
+
   constructor(
     public activeModal: NgbActiveModal,
     private helper: DataHelperModule,
@@ -67,24 +69,20 @@ export class HtmlViewerComponent implements OnInit {
     });
     this.onSelectChange(this.printlist.selectedIndex);
     this.count = this.printlist.dataDisplay(0).keysCount;
+
+    this.key = 1;
   }
 
   //　pager.component からの通知を受け取る
   onReceiveEventFromChild(eventData: number) {
     // this.loadPage(eventData, this.ROWS_COUNT);
   }
-  // window.addEventListener('load', (event) => {
 
-  //   // (1)ページ読み込み時に一度だけスクロール量を出力
-  //   var scroll_y = window.scrollY;
-  //   console.log(scroll_y);
-
-  //   // (2)スクロールするたびにスクロール量を出力
-  //   window.addEventListener('scroll', (event) => {
-  //     var scroll_y = window.scrollY;
-  //     console.log(scroll_y);
-  //   });
-  // });
+  onReceiveEventFromChildScroll(e: any) {
+    console.log(e);
+    this.key = e;
+    this.page = e;
+  }
 
   loadPage(currentPage: number, row: number) {
     // for (let i = this.dataset.length + 1; i <= row; i++) {
@@ -108,25 +106,27 @@ export class HtmlViewerComponent implements OnInit {
     this.activeModal.close(HtmlViewerComponent);
   }
 
-  public changePage(currentPage: number): void {
-    if (currentPage === this.page) {
-      // 同じボタンを押した時
-      this.Editing = true; // 編集ボックスを表示する
-      return; // 何もしない
+  public close(): void {
+    this.activeModal.close('Submit');
+  }
+
+  public print() {
+    printJS({
+      printable: 'print_section',
+      type: 'html',
+      style: this.PrintCss,
+    });
+  }
+
+  public onScroll() {
+    var infoF = document.getElementById('infoFrame');
+    if (infoF !== null) {
+      infoF.innerHTML = 'ScrollY:' + document.documentElement.scrollTop;
     }
+  }
+
+  public changePage(currentPage: number) {
     this.page = currentPage;
-
-    // ページ番号性を設定する
-    const n = Math.min(currentPage - 1, 2);
-    for (let i = 0; i < this.liNumber.length; i++) {
-      this.liNumber[i] = currentPage - n + i;
-    }
-
-    // active属性を設定する
-    for (let i = 0; i < this.liActive.length; i++) {
-      this.liActive[i] = false;
-    }
-    this.liActive[n] = true;
   }
 
   // ページを飛んだあと左右＜＞に移動や隣ページへの移動周辺、5ページ送り
@@ -151,47 +151,46 @@ export class HtmlViewerComponent implements OnInit {
       plus = 1;
     }
 
-    Next = this.page + count + additional;
+    Next = this.page + count;
     if (Next < 1) {
       Next = 1;
+      this.page = 1;
     }
 
     this.changePage(Next);
+    this.myControl.value.number2 = Next;
+    let number = document.getElementById('number');
+    if (number !== null && this.myControl.value.number2 < 1) {
+      this.myControl.value.number2 = 1;
+      this.key = 1;
+    } else if (number !== null && this.myControl.value.number2 > this.count) {
+      this.page = this.count;
+      this.myControl.value.number2 = this.count;
+      this.key = this.count;
+    } else if (number === null) {
+      alert('da');
+    } else {
+      let value = this.helper.toNumber(this.myControl.value.number2);
+      this.key = value;
+    }
   } // 見えないところにボタンを配置してある。ボタンを押すのとEnterを押すのは同じとしているのでこれが発火点となる
 
   public click(id = null) {
-    let value: number;
+    let value = this.helper.toNumber(this.myControl.value.number2);
 
-    if (id === null) {
-      value = this.helper.toNumber(this.myControl.value.number2);
+    if (value !== null || value < 1 || value > this.count) {
+      this.changePage(1);
+      this.key = 1;
+    } else if (value === null) {
+      alert('alert');
     } else {
-      value = this.helper.toNumber(id);
-    }
-
-    if (value !== null) {
       this.changePage(value);
-      this.Editing = false;
     }
   }
 
-  public close(): void {
-    this.activeModal.close('Submit');
-  }
+  // scrollEventt(childObj:){
 
-  public print() {
-    printJS({
-      printable: 'print_section',
-      type: 'html',
-      style: this.PrintCss,
-    });
-  }
-
-  public onScroll() {
-    var infoF = document.getElementById('infoFrame');
-    if (infoF !== null) {
-      infoF.innerHTML = 'ScrollY:' + document.documentElement.scrollTop;
-    }
-  }
+  // }
 
   // @HostListener('window:scroll', ['$event']) // for window scroll events
   // onScroll2(event: any) {
