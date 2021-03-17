@@ -16,29 +16,6 @@ var AppComponent = /** @class */ (function () {
     AppComponent.prototype.htmlViewerOpen = function () {
         this.modalService.open(html_viewer_component_1.HtmlViewerComponent).result.then(function (result) { });
     };
-    // @HostListener('scroll') scrolling(){
-    //   console.log('scrolling');
-    // }
-    // @HostListener('window:scroll', ['$event']) // for window scroll events
-    // onScroll2(event: any) {
-    // }
-    AppComponent.prototype.scrolling = function () {
-        console.log('scrolling');
-    };
-    AppComponent.prototype.onc = function () {
-        var infoH = document.getElementById('scroll-box1');
-        var infoI = document.getElementById('scroll-amount1');
-        if (infoH !== null) {
-            infoH.addEventListener('scroll', function () {
-                if (infoI !== null) {
-                    infoI.textContent = 'ScrollY:' + infoI.scrollTop;
-                }
-            });
-        }
-    };
-    __decorate([
-        core_1.HostListener('scroll')
-    ], AppComponent.prototype, "scrolling");
     AppComponent = __decorate([
         core_1.Component({
             selector: 'app-root',

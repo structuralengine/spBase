@@ -22,10 +22,11 @@
 }
 
 .print-container {
+    margin-top: 120px;
     padding: 12px;
     .slides {
-        width: 800px;
-        height: 1200px;
+        width: 810px;
+        height: 764px;
         margin: 0 auto;
         overflow: scroll;
     }
@@ -91,14 +92,14 @@
     font-size: 100px;
     position: relative;
     page-break-after: always;
-    counter-increment: page_count;
+    //counter-increment: page_count;
 }
 
 .slides>div::after {
     position: absolute;
     right: 0;
     bottom: 0;
-    content: counter(page_count) "ページ";
+    //content: counter(page_count) "ページ";
 }
 
 .sheet {

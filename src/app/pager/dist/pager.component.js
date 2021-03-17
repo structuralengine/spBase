@@ -111,6 +111,8 @@ var PagerComponent = /** @class */ (function () {
             this.changePage(value);
         }
     };
+    PagerComponent.prototype.scrollEventt = function (childObj) {
+    };
     __decorate([
         core_1.Output()
     ], PagerComponent.prototype, "event");

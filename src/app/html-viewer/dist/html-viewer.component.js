@@ -19,9 +19,9 @@ var HtmlViewerComponent = /** @class */ (function () {
         this.liNumber = [1, 2, 3, 4, 5];
         this.myControl = null;
         this.Editing = false;
-        this.page = 0;
         this.count = 0;
         this.name = 0;
+        this.key = 1;
         this.PrintCss = '@page {';
         this.PrintCss += 'size: A4;';
         this.PrintCss += 'margin: 0;';
@@ -62,21 +62,12 @@ var HtmlViewerComponent = /** @class */ (function () {
     HtmlViewerComponent.prototype.onReceiveEventFromChildScroll = function (e) {
         console.log(e);
         this.key = e;
-        this.page = e;
     };
     HtmlViewerComponent.prototype.loadPage = function (currentPage, row) {
-        // for (let i = this.dataset.length + 1; i <= row; i++) {
-        //   const fix_node = this.data.getElementColumns(currentPage, i);
-        //   this.dataset.push(fix_node);
-        // }
-        // this.page = currentPage;
     };
     HtmlViewerComponent.prototype.onSelectChange = function (value) {
         var v = parseInt(value);
         var data = this.printlist.PrintIndex[v - 1];
-        // this.InputData.initModel(data.file);
-        // this.get(item.file, item.name);
-        //this.fileIndex.FEMlist = value;
     };
     HtmlViewerComponent.prototype.dialogClose = function () {
         this.activeModal.close(HtmlViewerComponent_1);
@@ -97,45 +88,28 @@ var HtmlViewerComponent = /** @class */ (function () {
             infoF.innerHTML = 'ScrollY:' + document.documentElement.scrollTop;
         }
     };
-    HtmlViewerComponent.prototype.changePage = function (currentPage) {
-        this.page = currentPage;
+    // public changePage(currentPage: number) {
+    //   this.page = currentPage;
+    // }
+    HtmlViewerComponent.prototype.myFunct = function (keyEvent) {
+        if (keyEvent.which === 13)
+            alert('I am an alert');
     };
     // ページを飛んだあと左右＜＞に移動や隣ページへの移動周辺、5ページ送り
     HtmlViewerComponent.prototype.moveToNextPage = function (count) {
         var Next;
-        var additional;
-        var minus;
-        var plus;
-        // 1、2ページ目だけイレギュラーな動きをする
-        if (this.page === 1) {
-            additional = 2;
-            minus = -2;
-            plus = -1;
-        }
-        else if (this.page === 2) {
-            additional = 1;
-            minus = -1;
-            plus = 0;
-        }
-        else {
-            additional = 0;
-            minus = -1;
-            plus = 1;
-        }
-        Next = this.page + count;
+        Next = this.key + count;
         if (Next < 1) {
             Next = 1;
-            this.page = 1;
+            this.key = 1;
         }
-        this.changePage(Next);
         this.myControl.value.number2 = Next;
         var number = document.getElementById('number');
-        if (number !== null && this.myControl.value.number2 < 1) {
+        if (this.myControl.value.number2 < 1) {
             this.myControl.value.number2 = 1;
             this.key = 1;
         }
-        else if (number !== null && this.myControl.value.number2 > this.count) {
-            this.page = this.count;
+        else if (this.myControl.value.number2 > this.count) {
             this.myControl.value.number2 = this.count;
             this.key = this.count;
         }
@@ -146,19 +120,23 @@ var HtmlViewerComponent = /** @class */ (function () {
             var value = this.helper.toNumber(this.myControl.value.number2);
             this.key = value;
         }
-    }; // 見えないところにボタンを配置してある。ボタンを押すのとEnterを押すのは同じとしているのでこれが発火点となる
-    HtmlViewerComponent.prototype.click = function (id) {
-        if (id === void 0) { id = null; }
-        var value = this.helper.toNumber(this.myControl.value.number2);
-        if (value !== null || value < 1 || value > this.count) {
-            this.changePage(1);
-            this.key = 1;
-        }
-        else if (value === null) {
-            alert('alert');
-        }
-        else {
-            this.changePage(value);
+    };
+    HtmlViewerComponent.prototype.onKeydown = function (event) {
+        if (event.key === 'Enter') {
+            console.log(event.key);
+            var value = this.helper.toNumber(this.myControl.value.number2);
+            if (value < 1 || value > this.count) {
+                // this.changePage(1);
+                this.key = 1;
+            }
+            else if (value === null) {
+                alert('alert');
+            }
+            else {
+                this.key = value;
+            }
+            console.log(this.key);
+            document.getElementById('link').click();
         }
     };
     var HtmlViewerComponent_1;

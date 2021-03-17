@@ -19,16 +19,11 @@ export class HtmlViewerComponent implements OnInit {
   public liNumber = [1, 2, 3, 4, 5];
   public myControl: any = null;
   public Editing: boolean = false;
-  private page: number = 0;
-
   public count: number = 0;
-
   public name: number = 0;
-
   public PrintIndex;
-
-  key: any;
-
+  public key: number = 1;
+ 
   constructor(
     public activeModal: NgbActiveModal,
     private helper: DataHelperModule,
@@ -74,6 +69,7 @@ export class HtmlViewerComponent implements OnInit {
   }
 
   //　pager.component からの通知を受け取る
+  
   onReceiveEventFromChild(eventData: number) {
     // this.loadPage(eventData, this.ROWS_COUNT);
   }
@@ -81,25 +77,14 @@ export class HtmlViewerComponent implements OnInit {
   onReceiveEventFromChildScroll(e: any) {
     console.log(e);
     this.key = e;
-    this.page = e;
   }
 
   loadPage(currentPage: number, row: number) {
-    // for (let i = this.dataset.length + 1; i <= row; i++) {
-    //   const fix_node = this.data.getElementColumns(currentPage, i);
-    //   this.dataset.push(fix_node);
-    // }
-    // this.page = currentPage;
   }
 
   onSelectChange(value: string) {
     let v = parseInt(value);
     const data = this.printlist.PrintIndex[v - 1];
-
-    // this.InputData.initModel(data.file);
-    // this.get(item.file, item.name);
-
-    //this.fileIndex.FEMlist = value;
   }
 
   public dialogClose(): void {
@@ -125,46 +110,30 @@ export class HtmlViewerComponent implements OnInit {
     }
   }
 
-  public changePage(currentPage: number) {
-    this.page = currentPage;
+  // public changePage(currentPage: number) {
+  //   this.page = currentPage;
+  // }
+
+  public myFunct(keyEvent: { which: number }) {
+    if (keyEvent.which === 13) alert('I am an alert');
   }
 
   // ページを飛んだあと左右＜＞に移動や隣ページへの移動周辺、5ページ送り
   public moveToNextPage(count: number): void {
     let Next: number;
-    let additional: number;
-    let minus: number;
-    var plus: number;
 
-    // 1、2ページ目だけイレギュラーな動きをする
-    if (this.page === 1) {
-      additional = 2;
-      minus = -2;
-      plus = -1;
-    } else if (this.page === 2) {
-      additional = 1;
-      minus = -1;
-      plus = 0;
-    } else {
-      additional = 0;
-      minus = -1;
-      plus = 1;
-    }
-
-    Next = this.page + count;
+    Next = this.key + count;
     if (Next < 1) {
       Next = 1;
-      this.page = 1;
+      this.key = 1;
     }
 
-    this.changePage(Next);
     this.myControl.value.number2 = Next;
     let number = document.getElementById('number');
-    if (number !== null && this.myControl.value.number2 < 1) {
+    if ( this.myControl.value.number2 < 1) {
       this.myControl.value.number2 = 1;
       this.key = 1;
-    } else if (number !== null && this.myControl.value.number2 > this.count) {
-      this.page = this.count;
+    } else if ( this.myControl.value.number2 > this.count) {
       this.myControl.value.number2 = this.count;
       this.key = this.count;
     } else if (number === null) {
@@ -173,78 +142,23 @@ export class HtmlViewerComponent implements OnInit {
       let value = this.helper.toNumber(this.myControl.value.number2);
       this.key = value;
     }
-  } // 見えないところにボタンを配置してある。ボタンを押すのとEnterを押すのは同じとしているのでこれが発火点となる
+  } 
 
-  public click(id = null) {
-    let value = this.helper.toNumber(this.myControl.value.number2);
+  onKeydown(event: any) {
+    if (event.key === 'Enter') {
+      console.log(event.key);
+      let value = this.helper.toNumber(this.myControl.value.number2);
 
-    if (value !== null || value < 1 || value > this.count) {
-      this.changePage(1);
-      this.key = 1;
-    } else if (value === null) {
-      alert('alert');
-    } else {
-      this.changePage(value);
+      if (value < 1 || value > this.count) {
+        // this.changePage(1);
+        this.key = 1;
+      } else if (value === null) {
+        alert('alert');
+      } else {
+        this.key = value;
+      }
+      console.log(this.key);
+       document.getElementById('link')!.click();
     }
   }
-
-  // scrollEventt(childObj:){
-
-  // }
-
-  // @HostListener('window:scroll', ['$event']) // for window scroll events
-  // onScroll2(event: any) {
-  //   this.onScroll();
-  //   this.onc();
-  // }
-
-  // @HostListener('scroll',['$event'])
-  // onScroll3(event2:any){
-  //   this.onScroll4();
-  // }
-
-  // public onScroll4() {
-  //   var infoG = document.getElementById('scroll-amount');
-  //   if (infoG !== null) {
-  //     infoG.textContent = 'ScrollY:' + document.documentElement.scrollTop;
-  //   }
-  // }
-
-  // public onc() {
-  //   var infoH = document.getElementById('scroll-box');
-  //   var infoI = document.getElementById('scroll-amount');
-  //   if (infoH !== null) {
-  //     infoH.addEventListener('scroll', () => {
-  //       if (infoI !== null) {
-  //         //  infoI.textContent = 'ScrollY:' + infoI.scrollTop();
-  //       }
-  //     });
-  //   }
-  // }
-
-  // public gfg_Run() {
-  //   const el_up = document.getElementById('GFG_UP');
-  //   const el_down = document.getElementById('GFG_DOWN');
-
-  //   const text = document.getElementById('t');
-  //   if (text !== null) {
-  //     text.scrollTop = text.scrollHeight;
-  //   }
-  //   if (el_down !== null) {
-  //     el_down.innerHTML = 'Scroll bar is moved to bottom.';
-  //   }
-  // }
-
-  // public scrollEvent(e:any){
-  //   const i = e;
-  //   console.log(i);
-  // }
-
-  // window.addEventListener('scroll', () => {
-  //   // ここに関数
-  //  });
-
-  // $('#scroll-box').scroll(function() {
-  //     $('#scroll-amount').text($(this).scrollTop() + 'px');
-  // });
 }
