@@ -4,6 +4,7 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as printJS from 'print-js';
 import { DataHelperModule } from '../providers/data-helper.module';
 import { PrintListService } from '../print-list/print-list.service';
+import { HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-html-viewer',
@@ -19,6 +20,10 @@ export class HtmlViewerComponent implements OnInit {
   public myControl: any = null;
   public Editing: boolean = false;
   private page: number = 0;
+
+  public count: number = 0;
+
+  public name: number = 0;
 
   public PrintIndex;
 
@@ -61,8 +66,34 @@ export class HtmlViewerComponent implements OnInit {
       number2: new FormControl(),
     });
     this.onSelectChange(this.printlist.selectedIndex);
+    this.count = this.printlist.dataDisplay(0).keysCount;
   }
-  
+
+  //　pager.component からの通知を受け取る
+  onReceiveEventFromChild(eventData: number) {
+    // this.loadPage(eventData, this.ROWS_COUNT);
+  }
+  // window.addEventListener('load', (event) => {
+
+  //   // (1)ページ読み込み時に一度だけスクロール量を出力
+  //   var scroll_y = window.scrollY;
+  //   console.log(scroll_y);
+
+  //   // (2)スクロールするたびにスクロール量を出力
+  //   window.addEventListener('scroll', (event) => {
+  //     var scroll_y = window.scrollY;
+  //     console.log(scroll_y);
+  //   });
+  // });
+
+  loadPage(currentPage: number, row: number) {
+    // for (let i = this.dataset.length + 1; i <= row; i++) {
+    //   const fix_node = this.data.getElementColumns(currentPage, i);
+    //   this.dataset.push(fix_node);
+    // }
+    // this.page = currentPage;
+  }
+
   onSelectChange(value: string) {
     let v = parseInt(value);
     const data = this.printlist.PrintIndex[v - 1];
@@ -154,4 +185,67 @@ export class HtmlViewerComponent implements OnInit {
       style: this.PrintCss,
     });
   }
+
+  public onScroll() {
+    var infoF = document.getElementById('infoFrame');
+    if (infoF !== null) {
+      infoF.innerHTML = 'ScrollY:' + document.documentElement.scrollTop;
+    }
+  }
+
+  // @HostListener('window:scroll', ['$event']) // for window scroll events
+  // onScroll2(event: any) {
+  //   this.onScroll();
+  //   this.onc();
+  // }
+
+  // @HostListener('scroll',['$event'])
+  // onScroll3(event2:any){
+  //   this.onScroll4();
+  // }
+
+  // public onScroll4() {
+  //   var infoG = document.getElementById('scroll-amount');
+  //   if (infoG !== null) {
+  //     infoG.textContent = 'ScrollY:' + document.documentElement.scrollTop;
+  //   }
+  // }
+
+  // public onc() {
+  //   var infoH = document.getElementById('scroll-box');
+  //   var infoI = document.getElementById('scroll-amount');
+  //   if (infoH !== null) {
+  //     infoH.addEventListener('scroll', () => {
+  //       if (infoI !== null) {
+  //         //  infoI.textContent = 'ScrollY:' + infoI.scrollTop();
+  //       }
+  //     });
+  //   }
+  // }
+
+  // public gfg_Run() {
+  //   const el_up = document.getElementById('GFG_UP');
+  //   const el_down = document.getElementById('GFG_DOWN');
+
+  //   const text = document.getElementById('t');
+  //   if (text !== null) {
+  //     text.scrollTop = text.scrollHeight;
+  //   }
+  //   if (el_down !== null) {
+  //     el_down.innerHTML = 'Scroll bar is moved to bottom.';
+  //   }
+  // }
+
+  // public scrollEvent(e:any){
+  //   const i = e;
+  //   console.log(i);
+  // }
+
+  // window.addEventListener('scroll', () => {
+  //   // ここに関数
+  //  });
+
+  // $('#scroll-box').scroll(function() {
+  //     $('#scroll-amount').text($(this).scrollTop() + 'px');
+  // });
 }

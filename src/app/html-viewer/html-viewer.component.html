@@ -1,12 +1,15 @@
 <header>
     <p class="title">印刷</p>
+    <div class="page">
+        <app-pager (event)="onReceiveEventFromChild($event)"></app-pager>
+    </div>
     <div>
         <form>
             <select [(ngModel)]="printlist.selectedIndex" (ngModelChange)='onSelectChange($event.target.value)' name="first">
-        <option *ngFor="let item of PrintIndex" [value]="item.id" [selected]="1">
-          {{item.name}}
-        </option>
-      </select>
+                <option *ngFor="let item of PrintIndex" [value]="item.id" [selected]="1">
+                    {{item.name}}
+                </option>
+            </select>
         </form>
     </div>
     <div class="slider">
@@ -23,7 +26,41 @@
 </header>
 
 <div #print_section id="print_section" class="HtmlPage">
-
     <app-test-html></app-test-html>
-
 </div>
+
+<!-- <body style="text-align:center;">
+
+    <h1 style="color:green;">
+        GeeksForGeeks
+    </h1>
+
+    <p id="GFG_UP" style="font-size: 15px; font-weight: bold;">
+    </p>
+
+    <textarea id="t"> 
+        GeeksforGeeks is a Computer Science 
+        portal for geeks. It contains well 
+        written, well thought and well  
+        explained computer science and 
+        programming articles, quizzes etc.  
+        It also contains the practice section 
+        which is helpful for practicing the 
+        data structure and algorithms 
+        questions. GeeksforGeeks provides 
+        placement course, DSA class, Machine 
+        learning class and other online and 
+        offline courses which will help in 
+        placement and also growing the 
+        knowledge. 
+    </textarea>
+
+    <br>
+
+    <button (click)="gfg_Run()">  
+        click here 
+    </button>
+
+    <p id="GFG_DOWN" style="color:green; 
+        font-size: 20px; font-weight: bold;">
+    </p> -->

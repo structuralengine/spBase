@@ -10,6 +10,9 @@ header {
         color: #fff;
         font-size: 14px;
     }
+    .page {
+        color: #fff;
+    }
     .button-area {
         .print-button {
             margin-right: 12px;
@@ -123,4 +126,14 @@ img {
 
 .slider>a:focus {
     background: #000;
+}
+
+#scroll-box {
+    overflow: scroll;
+    height: 100px;
+    border: 1px solid black;
+}
+
+#scroll-contents {
+    height: 700px;
 }
