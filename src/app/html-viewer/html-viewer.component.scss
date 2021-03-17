@@ -1,6 +1,9 @@
 /*header*/
 
 header {
+    position: absolute;
+    width: 100%;
+    z-index: 2;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -64,8 +67,8 @@ header {
     box-sizing: border-box;
     page-break-after: always;
     /* 用紙サイズ A4 */
-    height: 1123px;
-    width: 794px;
+    height: 297mm;
+    width: 210mm;
     /* 余白サイズ */
     padding-top: 83px;
     padding-left: 113px;
@@ -139,14 +142,17 @@ img {
 }
 
 .pagerArea {
+    a {
+        display: none;
+    }
     .pager {
         // margin-right: 0.5px;
         // margin-left: 0.5px;
         // margin-top: 16px;
         // height: 36px;
-        button {
-            display: none;
-        }
+        // button {
+        //display: none;
+        // }
         display: inline-block;
         .pagenation {
             display: flex;

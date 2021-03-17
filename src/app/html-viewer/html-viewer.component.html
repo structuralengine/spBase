@@ -5,34 +5,33 @@
             <div class="pager">
                 <form [formGroup]="myControl">
                     <ul class="pagenation" style="margin: 0;">
-                        <li><a id="prev" link="140" (click)="moveToNextPage(-1)" aria-label="Previous">《</a></li>
+                        <li><a href="#{{key}}" id="prev" link="140" (click)="moveToNextPage(-1)" aria-label="Previous">《</a></li>
                         <li>
-                            <input type="number" id="number" key="KeyId" [(ngModel)]="key" matInput matType="number" formControlName="number2" class="pageNum">
+                            <input (keydown)="onKeydown($event)" type="number" id="number" key="KeyId" [(ngModel)]="key" matInput matType="number" formControlName="number2" class="pageNum">
                         </li>
                         <li style="margin-top:6px;">/{{count}}</li>
-                        <li><a id="next" (click)="moveToNextPage(1)" aria-label="Next">》</a></li>
+                        <li><a href="#{{key}}" id="next" (click)="moveToNextPage(1)" aria-label="Next">》</a></li>
                     </ul>
-                    <button mat-raised-button (click)="click()">click</button>
+                    <a href="#{{key}}" id="link"></a>
                 </form>
-                <!-- <p class="message">{{message}}</p> -->
             </div>
         </div>
     </div>
     <div>
         <form>
             <select [(ngModel)]="printlist.selectedIndex" (ngModelChange)='onSelectChange($event.target.value)' name="first">
-                <option *ngFor="let item of PrintIndex" [value]="item.id" [selected]="1">
-                    {{item.name}}
-                </option>
-            </select>
+        <option *ngFor="let item of PrintIndex" [value]="item.id" [selected]="1">
+          {{item.name}}
+        </option>
+      </select>
         </form>
     </div>
     <div class="slider">
-        <a href="#slide-1">1</a>
-        <a href="#slide-2">2</a>
-        <a href="#slide-3">3</a>
-        <a href="#slide-4">4</a>
-        <a href="#slide-5">5</a>
+        <a href="#1">1</a>
+        <a href="#2">2</a>
+        <a href="#3">3</a>
+        <a href="#4">4</a>
+        <a href="#5">5</a>
     </div>
     <div class="button-area">
         <button (click)="print()" class="print-button"><i class="fi fi-print"></i></button>

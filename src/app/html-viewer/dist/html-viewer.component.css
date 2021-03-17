@@ -1,6 +1,9 @@
 @charset "UTF-8";
 /*header*/
 header {
+  position: absolute;
+  width: 100%;
+  z-index: 2;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -60,8 +63,8 @@ header .button-area .dialog-close-button:hover {
   box-sizing: border-box;
   page-break-after: always;
   /* 用紙サイズ A4 */
-  height: 1123px;
-  width: 794px;
+  height: 297mm;
+  width: 210mm;
   /* 余白サイズ */
   padding-top: 83px;
   padding-left: 113px;
@@ -134,11 +137,11 @@ img {
   height: 700px;
 }
 
+.pagerArea a {
+  display: none;
+}
 .pagerArea .pager {
   display: inline-block;
-}
-.pagerArea .pager button {
-  display: none;
 }
 .pagerArea .pager .pagenation {
   display: flex;

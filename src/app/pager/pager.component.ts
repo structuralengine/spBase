@@ -122,7 +122,7 @@ export class PagerComponent implements OnInit {
     }
   }
   
-  // scrollEventt(childObj:){
+  scrollEventt(childObj:any){
 
-  // }
+  }
 }
