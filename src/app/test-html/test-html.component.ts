@@ -30,7 +30,7 @@ export class TestHtmlComponent implements OnInit {
     this.page_scroll = Math.ceil(scroll_top / 975);
     // 親コンポーネントに通知する
     this.event.emit(this.page_scroll);
-    console.log(this.page_scroll);
+  //  console.log(this.page_scroll);
   }
 
   constructor(public printlist: PrintListService) {}
